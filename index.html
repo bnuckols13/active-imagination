@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Living Image — Imaginal Arts & Depth Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #1a1a2e;
+            --parchment: #f5f0e8;
+            --parchment-dark: #e8e0d0;
+            --teal-deep: #14716b;
+            --teal-light: #2d9f93;
+            --teal-glow: #5eead4;
+            --rose-muted: #b56576;
+            --rose-soft: #e8a0b4;
+            --violet-deep: #6a4c93;
+            --violet-soft: #b19cd9;
+            --gold-warm: #c9a84c;
+            --gold-light: #e8d5a3;
+            --slate: #4a5568;
+            --slate-light: #718096;
+            --shadow-soft: 0 8px 32px rgba(26, 26, 46, 0.08);
+            --shadow-medium: 0 12px 48px rgba(26, 26, 46, 0.12);
+            --shadow-hover: 0 16px 56px rgba(26, 26, 46, 0.16);
+        }
+
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(20, 113, 107, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(106, 76, 147, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(181, 101, 118, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-sigil {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.04;
+            z-index: 0;
+        }
+
+        .bg-sigil-1 {
+            width: 400px;
+            height: 400px;
+            border: 2px solid var(--teal-deep);
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+            animation: drift 30s infinite ease-in-out;
+        }
+
+        .bg-sigil-2 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--violet-deep);
+            top: 40%;
+            left: -120px;
+            transform: rotate(45deg);
+            animation: drift 25s infinite ease-in-out reverse;
+        }
+
+        .bg-sigil-3 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--rose-muted);
+            border-radius: 50%;
+            bottom: 10%;
+            right: 5%;
+            animation: drift 35s infinite ease-in-out;
+            animation-delay: -8s;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(15px, -20px) rotate(3deg); }
+            66% { transform: translate(-10px, 15px) rotate(-2deg); }
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+            animation: fadeDown 0.8s ease;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-sigil {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--gold-warm);
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .header-sigil::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px solid var(--gold-warm);
+            border-radius: 50%;
+        }
+
+        .header-sigil::after {
+            content: '◇';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold-warm);
+            font-size: 1rem;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--slate-light);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .group-meta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--slate-light);
+            letter-spacing: 0.03em;
+        }
+
+        /* Navigation */
+        .nav-row {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            border: 1.5px solid rgba(201, 168, 76, 0.3);
+            border-radius: 4px;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover {
+            border-color: var(--gold-warm);
+            color: var(--ink);
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .nav-tab.active {
+            background: var(--ink);
+            color: var(--parchment);
+            border-color: var(--ink);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card-accent {
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            right: 2rem;
+            height: 2px;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .accent-teal { background: linear-gradient(90deg, var(--teal-deep), var(--teal-light)); }
+        .accent-violet { background: linear-gradient(90deg, var(--violet-deep), var(--violet-soft)); }
+        .accent-rose { background: linear-gradient(90deg, var(--rose-muted), var(--rose-soft)); }
+        .accent-gold { background: linear-gradient(90deg, var(--gold-warm), var(--gold-light)); }
+
+        .card h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--teal-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .icon-teal { background: rgba(20, 113, 107, 0.1); color: var(--teal-deep); }
+        .icon-violet { background: rgba(106, 76, 147, 0.1); color: var(--violet-deep); }
+        .icon-rose { background: rgba(181, 101, 118, 0.1); color: var(--rose-muted); }
+        .icon-gold { background: rgba(201, 168, 76, 0.1); color: var(--gold-warm); }
+
+        /* Opening Quote */
+        .quote-block {
+            text-align: center;
+            padding: 2rem 2.5rem;
+            margin: 1.5rem 0;
+            background: linear-gradient(135deg, rgba(20, 113, 107, 0.03) 0%, rgba(106, 76, 147, 0.03) 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold-warm);
+            border-right: 3px solid var(--gold-warm);
+        }
+
+        .quote-block p {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--ink);
+            line-height: 1.8;
+        }
+
+        .quote-source {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--slate-light);
+            font-style: normal;
+            letter-spacing: 0.03em;
+        }
+
+        /* Centering Meditation */
+        .meditation-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .breath-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--teal-deep);
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--teal-deep);
+            letter-spacing: 0.05em;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .breath-circle::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 1px solid rgba(20, 113, 107, 0.2);
+            border-radius: 50%;
+        }
+
+        .breath-circle.breathing {
+            animation: breathe 8s infinite ease-in-out;
+        }
+
+        .breath-circle.breathing::before {
+            animation: breathe-outer 8s infinite ease-in-out;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); border-color: var(--teal-deep); }
+            25% { transform: scale(1.15); border-color: var(--teal-light); }
+            50% { transform: scale(1.15); border-color: var(--teal-light); }
+            75% { transform: scale(1); border-color: var(--teal-deep); }
+        }
+
+        @keyframes breathe-outer {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            25% { transform: scale(1.12); opacity: 0.4; }
+            50% { transform: scale(1.12); opacity: 0.4; }
+            75% { transform: scale(1); opacity: 0.2; }
+        }
+
+        .breath-instruction {
+            font-size: 1rem;
+            color: var(--slate);
+            margin-top: 1rem;
+            min-height: 1.5em;
+            transition: opacity 0.5s ease;
+        }
+
+        .meditation-steps {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .meditation-steps li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--slate);
+            list-style: none;
+        }
+
+        .meditation-steps li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--teal-deep);
+            font-size: 0.6rem;
+            top: 0.85rem;
+        }
+
+        /* Expandable sections */
+        .expandable {
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .expandable:hover {
+            border-color: rgba(20, 113, 107, 0.2);
+        }
+
+        .expandable-header {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(245, 240, 232, 0.5);
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+
+        .expandable-header:hover {
+            background: rgba(20, 113, 107, 0.04);
+        }
+
+        .expandable-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .expand-icon {
+            font-size: 0.8rem;
+            color: var(--slate-light);
+            transition: transform 0.3s ease;
+        }
+
+        .expandable.open .expand-icon {
+            transform: rotate(90deg);
+        }
+
+        .expandable-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .expandable.open .expandable-body {
+            max-height: 2000px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .expandable-body p {
+            color: var(--slate);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Principle cards */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .principle-card {
+            padding: 1.5rem;
+            background: var(--parchment);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .principle-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--teal-deep);
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-card p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Station grid */
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .station-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .station-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .station-card.expanded {
+            grid-column: 1 / -1;
+        }
+
+        .station-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--slate-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .station-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .station-card .station-subtitle {
+            color: var(--slate-light);
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .station-body {
+            display: none;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .station-card.expanded .station-body {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .station-prompt {
+            background: var(--parchment);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--teal-deep);
+        }
+
+        .station-prompt p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .station-prompt strong {
+            color: var(--ink);
+        }
+
+        .facilitator-note {
+            background: rgba(201, 168, 76, 0.06);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed rgba(201, 168, 76, 0.3);
+        }
+
+        .facilitator-note::before {
+            content: '◇ Facilitator Note';
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-warm);
+            margin-bottom: 0.5rem;
+        }
+
+        .facilitator-note p {
+            color: var(--slate);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Textarea & inputs */
+        .reflection-area {
+            margin-top: 1.5rem;
+        }
+
+        .reflection-area label {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1.5px solid rgba(20, 113, 107, 0.2);
+            border-radius: 8px;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            resize: vertical;
+            min-height: 100px;
+            background: white;
+            color: var(--ink);
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--teal-deep);
+            box-shadow: 0 0 0 3px rgba(20, 113, 107, 0.08);
+        }
+
+        textarea::placeholder {
+            color: var(--slate-light);
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            padding: 0.7rem 1.8rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--parchment);
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(20, 113, 107, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--slate);
+            border: 1.5px solid rgba(0,0,0,0.12);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--teal-deep);
+            color: var(--teal-deep);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Pass option */
+        .pass-option {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: var(--slate-light);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .pass-option a {
+            color: var(--teal-deep);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+
+        /* Integration Section */
+        .integration-prompt {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(20, 113, 107, 0.04), rgba(106, 76, 147, 0.04));
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+        }
+
+        .integration-prompt h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .integration-prompt p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Closing */
+        .closing-block {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.25);
+            margin-top: 2rem;
+        }
+
+        .closing-block p {
+            color: var(--slate);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 1.5rem 1rem; }
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.5rem; }
+            .nav-row { gap: 0.35rem; }
+            .nav-tab { padding: 0.5rem 1rem; font-size: 0.75rem; }
+            .station-grid { grid-template-columns: 1fr; }
+            .quote-block { padding: 1.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.15s !important;
+            }
+        }
+
+        @media print {
+            .bg-sigil, .nav-row, .breath-circle { display: none; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+            .expandable-body { max-height: none !important; padding: 0 1.5rem 1.5rem !important; }
+            .station-body { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-sigil bg-sigil-1"></div>
+<div class="bg-sigil bg-sigil-2"></div>
+<div class="bg-sigil bg-sigil-3"></div>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-sigil"></div>
+        <h1>The Living Image</h1>
+        <p class="subtitle">Imaginal Arts & Depth Practice — Process, Not Perfection</p>
+        <p class="group-meta">Expressive Arts Therapy Group ◆ 75–90 minutes ◆ Adults</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-row" role="tablist" aria-label="Group sections">
+        <button class="nav-tab active" role="tab" onclick="showPage(0)" aria-selected="true">I · Opening</button>
+        <button class="nav-tab" role="tab" onclick="showPage(1)">II · Foundations</button>
+        <button class="nav-tab" role="tab" onclick="showPage(2)">III · Stations</button>
+        <button class="nav-tab" role="tab" onclick="showPage(3)">IV · Integration</button>
+    </nav>
+
+    <!-- ===================== PAGE 1: OPENING ===================== -->
+    <section class="page active" id="page-0">
+
+        <div class="card">
+            <div class="card-accent accent-gold"></div>
+            <h2><span class="section-icon icon-gold">◇</span> Welcome & Centering</h2>
+
+            <div class="quote-block">
+                <p>"The soul never thinks without an image."</p>
+                <div class="quote-source">— Aristotle, <em>De Anima</em></div>
+            </div>
+
+            <div class="meditation-container">
+                <p style="color: var(--slate); max-width: 560px; margin: 0 auto 1rem;">Before we begin, let's arrive together. Click the circle below to start a breathing guide, or simply follow along in silence.</p>
+
+                <div class="breath-circle" id="breathCircle" onclick="toggleBreathing()" tabindex="0" role="button" aria-label="Start breathing exercise">
+                    <span id="breathText">Begin</span>
+                </div>
+
+                <p class="breath-instruction" id="breathInstruction"></p>
+            </div>
+
+            <div class="meditation-steps">
+                <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-deep); margin-bottom: 0.75rem;">Centering Meditation Guide</p>
+                <ul>
+                    <li>Let your body settle. Notice where you make contact with the chair, the floor, the space around you.</li>
+                    <li>Bring awareness to whatever feeling is most present right now — not to change it, but to acknowledge it as a guest arriving at the threshold.</li>
+                    <li>Depth psychology teaches us that emotions carry images within them, and images carry wisdom the thinking mind can't easily reach. Today we'll explore what's waiting beneath the surface of your felt experience.</li>
+                    <li>There is no right way to do this. The process itself — the willingness to look inward and stay — is the practice.</li>
+                    <li>When you're ready, gently open your eyes and let yourself be curious about what wants to emerge.</li>
+                </ul>
+            </div>
+
+            <div class="pass-option">
+                As always, you are welcome to <a onclick="showPage(1)">pass</a> or modify any part of this experience to honor your own needs.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-accent accent-teal"></div>
+            <h2><span class="section-icon icon-teal">◆</span> Today's Intention</h2>
+            <p style="color: var(--slate); font-size: 1.05rem; line-height: 1.8;">Today's group draws from the depth psychological tradition of <strong>active imagination</strong> — the art of allowing images to arise from within and engaging them without trying to control the outcome. Rooted in the understanding that psyche is always generating images, symbols, and felt senses that carry meaning, this practice invites us to listen rather than direct. We fuse this with a core principle: <strong>process, not perfection</strong>. What matters is not the beauty of what you create, but the encounter itself. The healing lives in the doing.</p>
+
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <div class="principle-label">Principle I</div>
+                    <p>Start with what you feel, not what you think</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-label">Principle II</div>
+                    <p>Let images arrive on their own terms — don't force or choreograph them</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-label">Principle III</div>
+                    <p>Stay curious rather than critical — soften the inner editor</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-label">Principle IV</div>
+                    <p>Psyche has its own intelligence — treat what arises as a guest, not a possession</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PAGE 2: FOUNDATIONS ===================== -->
+    <section class="page" id="page-1">
+
+        <div class="card">
+            <div class="card-accent accent-violet"></div>
+            <h2><span class="section-icon icon-violet">◈</span> The Imaginal — What Are We Practicing?</h2>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">Active imagination is not guided imagery, daydreaming, or free association. It's a practice of <em>encountering</em> the images that live beneath conscious awareness — and engaging them in relationship. The depth tradition recognizes that we don't just <em>have</em> an unconscious; it has us. Images, symbols, and figures arise constantly — in dreams, in symptoms, in the body, in the creative impulse. Usually we ignore them, explain them away, or try to control them. Today we practice something different: we meet them.</p>
+
+            <div class="expandable" onclick="toggleExpand(this)">
+                <div class="expandable-header">
+                    <h3><span class="section-icon icon-teal" style="width:28px;height:28px;font-size:0.7rem;">◆</span> Affect as Threshold</h3>
+                    <span class="expand-icon">▸</span>
+                </div>
+                <div class="expandable-body">
+                    <p>In depth work, the doorway to the imaginal is <strong>feeling</strong>, not thinking. Rather than analyzing an emotion, we sink into it — noticing its texture, weight, temperature, and location in the body — and wait for what naturally emerges. The affect is not a problem to solve. It's the threshold to cross.</p>
+                    <p>The practice is deceptively simple: make yourself as conscious as possible of the mood you're in, stay with it without reserve, and notice what images, colors, shapes, or words begin to present themselves. Emotion carries the image; the image carries the meaning.</p>
+                </div>
+            </div>
+
+            <div class="expandable" onclick="toggleExpand(this)">
+                <div class="expandable-header">
+                    <h3><span class="section-icon icon-violet" style="width:28px;height:28px;font-size:0.7rem;">◈</span> Softening the Inner Critic</h3>
+                    <span class="expand-icon">▸</span>
+                </div>
+                <div class="expandable-body">
+                    <p>The first practical step is creating what depth psychologists call a <strong>vacuum in consciousness</strong> — a receptive, open space where the judging mind softens and something unexpected can arrive. This is not mindlessness; it's a disciplined hospitality.</p>
+                    <p>Most of us carry an inner voice that criticizes, judges, dismisses, or undermines our creative process the moment it begins. This can be understood as the ego's resistance to allowing deeper material airtime. Today we practice noticing that critic and gently setting it aside — <em>not silencing it, but not obeying it either.</em> We acknowledge the voice and return to the feeling.</p>
+                </div>
+            </div>
+
+            <div class="expandable" onclick="toggleExpand(this)">
+                <div class="expandable-header">
+                    <h3><span class="section-icon icon-rose" style="width:28px;height:28px;font-size:0.7rem;">◇</span> The Autonomy of Images</h3>
+                    <span class="expand-icon">▸</span>
+                </div>
+                <div class="expandable-body">
+                    <p>One of the most radical ideas in depth psychology is that images have their own life. We tend to assume we generate our thoughts and images — that they belong to us, that we're their author. But the depth tradition suggests otherwise: inner figures, dream images, and spontaneous fantasies arise with an autonomy that surprises us precisely because they don't come from our conscious intentions.</p>
+                    <p>As the archetypal psychologist James Hillman put it, we should attend to images on <em>their</em> terms rather than translating them into something our ego already understands. When we create today, we're not manufacturing — we're <strong>receiving visitors</strong>. Your task is to be a gracious host, not an architect. Let the image surprise you. Let it be strange.</p>
+                </div>
+            </div>
+
+            <div class="expandable" onclick="toggleExpand(this)">
+                <div class="expandable-header">
+                    <h3><span class="section-icon icon-gold" style="width:28px;height:28px;font-size:0.7rem;">◇</span> Two Paths: Making & Meaning</h3>
+                    <span class="expand-icon">▸</span>
+                </div>
+                <div class="expandable-body">
+                    <p>The depth tradition describes two complementary ways of working with what arises from the imaginal. <strong>Creative formulation</strong> means giving the image tangible form — through painting, movement, sound, writing — and letting themes coalesce intuitively. <strong>Understanding</strong> means sitting with the material and asking what it means for your life, what it's pointing toward.</p>
+                    <p>Both paths have value, and both have pitfalls. Pure formulation can become aestheticized — we get lost in making it beautiful and forget the encounter. Pure understanding can become intellectualized — we analyze the life out of the image. Today we lean into creative formulation first and understanding second, trusting that meaning often reveals itself <em>through</em> the making. This is the heart of "process, not perfection."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-accent accent-rose"></div>
+            <h2><span class="section-icon icon-rose">◇</span> Ground Rules for Today</h2>
+            <div style="color: var(--slate); line-height: 2;">
+                <p style="margin-bottom: 0.5rem;">◆ <strong>No critiquing</strong> — your own or others' work. The inner editor gets a break today.</p>
+                <p style="margin-bottom: 0.5rem;">◆ <strong>Process over product.</strong> The healing is in the encounter, not the artifact.</p>
+                <p style="margin-bottom: 0.5rem;">◆ <strong>Honor autonomy.</strong> Pass on any station. Modify freely. Your body knows what it needs.</p>
+                <p style="margin-bottom: 0.5rem;">◆ <strong>Confidentiality.</strong> What's shared in group stays in group.</p>
+                <p>◆ <strong>Stay grounded.</strong> If intensity arises, return to your senses: feet on floor, hands on surface, slow exhale. Depth work requires a grounded body.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PAGE 3: CREATIVE STATIONS ===================== -->
+    <section class="page" id="page-2">
+
+        <div class="card">
+            <div class="card-accent accent-teal"></div>
+            <h2><span class="section-icon icon-teal">◆</span> Creative Stations</h2>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 0.5rem;">Choose one or two stations that call to you. Each begins the same way: <strong>start with what you feel</strong>, soften the critic, and let the image arrive on its own terms. Spend 20–30 minutes in your chosen station. Click a station to expand its full instructions.</p>
+            <p class="pass-option" style="margin: 0; text-align: left; padding: 0;">Remember: you can always pass or sit quietly with your experience. Stillness is its own depth practice.</p>
+        </div>
+
+        <div class="station-grid" id="stationGrid">
+
+            <!-- Station 1: Visual -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station I</div>
+                <h3>The Threshold Image</h3>
+                <p class="station-subtitle">Visual Arts — Paint, Draw, Collage</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Begin with a felt sense and let a visual image emerge without planning the composition.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> Close your eyes. Drop into the feeling that is most present for you right now. Notice its quality — is it heavy? Tight? Buzzing? Cool? Without forcing anything, wait for a color, a shape, or a scene to emerge. It may be fragmentary, half-formed, or nonsensical. That's welcome.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> Begin putting this on paper. Use whatever medium draws you — paint, pencil, torn paper, marker. Do not plan the image. Let your hand follow the feeling, not the other way around. If the image shifts, follow it. If the critic speaks, acknowledge it and return to the feeling. You are not illustrating something you already know — you are discovering what psyche wants to show you.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Dialogue:</strong> When the image feels "enough" (not finished — enough), pause. Look at it as if it were a visitor who arrived uninvited. If this image could speak, what would it say? Write one sentence from the image's perspective on the back or margin.</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>Provide a range of materials: watercolor, oil pastels, torn magazine images, colored pencils. Emphasize that skill is irrelevant — stick figures, abstract marks, and "ugly" images are all welcome and often carry the most energy. Watch for participants who freeze; gently suggest starting with a single color or a single mark.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station 2: Writing -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station II</div>
+                <h3>Voices in the Room</h3>
+                <p class="station-subtitle">Writing — Dialogue & Imaginal Encounter</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Engage in written dialogue with an inner figure, feeling, or image — as if it has its own voice and perspective.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> Identify a feeling, recurring thought, or inner figure that has been present lately — perhaps an anxious voice, a grieving part, a dream image, or even a body sensation with a personality. Give it a name or title. It could be as simple as "The Heavy One" or "The Watcher at the Edge."</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> Begin a written conversation. Write your question or greeting, then <em>let the figure respond</em>. Don't script the response — write whatever comes, even if it surprises you. The depth tradition holds that inner figures are not merely aspects of "us" — they carry their own intelligence, their own agenda. You don't have to agree with them. You do have to listen. Continue the dialogue for at least one full page.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Close:</strong> Thank the figure. Ask yourself: what did they say that I didn't expect? Where did the conversation take me that my conscious mind wouldn't have chosen?</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>Some participants may find this station emotionally activating. Normalize that — the material arises because it's ready to be met. Remind them they can pause, ground, or move to a different station at any time. Offer the option of writing with the non-dominant hand to further bypass the critic.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station 3: Movement -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station III</div>
+                <h3>The Body Knows</h3>
+                <p class="station-subtitle">Movement & Gesture</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Let the body express what words and images cannot — start with somatic awareness and let movement emerge.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> Stand or sit comfortably. Place one hand where you notice the strongest sensation in your body. Breathe into that area. Without choreographing, let a small movement begin — a sway, a curl, a reach, a tightening. Follow it the way you'd follow a thread in the dark.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> Let the movement grow or stay small — both are valid. You are not performing; you are listening to the body's own imaginal language. Notice if the movement has a rhythm, a direction, a quality (sharp, fluid, stuck, circular). Stay with it for several minutes. If it resolves into stillness, honor that stillness as its own kind of image.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Capture:</strong> After your movement, take 2 minutes to sketch the shape or path your body traced — not a literal drawing, but an abstract gesture on paper. Or write 3 words that name the quality of the movement.</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>Play ambient, non-directive music or silence. Ensure enough physical space between participants. This station can be done seated for those with mobility needs. Eyes closed is encouraged but optional. The somatic dimension is central to depth work — the body is not separate from psyche.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station 4: Sound -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station IV</div>
+                <h3>The Unheard Song</h3>
+                <p class="station-subtitle">Sound & Voice</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Explore what your inner landscape sounds like through toning, humming, rhythm, or found sound.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> Close your eyes and listen inward. If your current emotional state had a sound — not a word, but a <em>sound</em> — what would it be? A hum, a sigh, a drumbeat, a whisper, a growl? Let it form without judgment. Psyche speaks through many channels — for some people, the auditory is the most natural doorway.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> Begin making the sound — softly at first, then at whatever volume feels right. Use your voice, tap on a surface, use available instruments. Let the sound evolve. Follow its natural arc. It may shift from discordant to melodic, or stay raw throughout. Both are honest. You are not composing — you are listening to what psyche wants to sound like.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Capture:</strong> After sounding, sit in the silence that follows. Notice what shifted in your body. Write or draw a "sound map" — marks on paper that represent the shape of what you heard from within.</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>Provide hand drums, singing bowls, shakers, or simple percussion. For groups where voice feels too vulnerable, rhythm-only is a comfortable entry point. Participants can also listen rather than produce sound — receptive witnessing is a valid form of imaginal engagement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station 5: Sculpt/Tableau -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station V</div>
+                <h3>The Inner Landscape</h3>
+                <p class="station-subtitle">Sculpting & Tableau</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Use clay, objects, or body posture to give three-dimensional form to your inner experience.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> Choose your medium — clay, found objects, or your own body posture. Hold the feeling that is most present. Ask yourself: if this feeling were a landscape, a creature, or a scene, what would it look like? Let the image come to you rather than designing it.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> Build without a blueprint. Let your hands make decisions your mind hasn't approved yet. If using objects, arrange them in relationship to each other — which one feels central? Which is at the edge? What's the distance between them? The psyche thinks in spatial relationships as much as in words.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Dialogue:</strong> Step back and look at what you've made as if encountering it for the first time. Ask: "What are you showing me?" Give the central element a voice — write one line of what it would say if it could speak.</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>Air-dry clay, pipe cleaners, stones, buttons, fabric scraps, and miniatures all work well. For body-based work, participants can create a frozen posture (tableau) representing the feeling. Pairs can mirror each other's postures for deeper attunement. This station draws on the depth tradition's recognition that psyche externalizes itself through arrangement and form.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station 6: Open/Intuitive -->
+            <div class="station-card" onclick="toggleStation(this)">
+                <div class="station-number">Station VI</div>
+                <h3>The Open Gate</h3>
+                <p class="station-subtitle">Intuitive — Your Own Modality</p>
+                <p style="color: var(--slate); font-size: 0.95rem;">Trust whatever channel feels most alive for you. Combine modalities, sit in stillness, or follow impulse.</p>
+                <div class="station-body">
+                    <div class="station-prompt">
+                        <p><strong>Entry:</strong> The depth tradition recognizes that each person has their own primary channel of imaginal access — some see images easily, others hear words or music, others feel movement or know through the body. Rather than choosing a prescribed station, follow your own channel. What is your body-mind already doing?</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Engagement:</strong> You might combine modalities — draw while humming, move and then write what the movement said, sculpt and then speak to the sculpture. Or you might sit quietly and let an image, memory, or sensation unfold internally. This, too, is active imagination. The only criterion: <em>stay conscious and in relationship with what arises.</em> Don't drift. Don't analyze. Attend.</p>
+                    </div>
+                    <div class="station-prompt">
+                        <p><strong>Capture:</strong> However you engaged, leave a trace — a word, a mark, a gesture, a single sentence. Something to anchor the imaginal encounter when you return to ordinary awareness.</p>
+                    </div>
+                    <div class="facilitator-note">
+                        <p>This station serves participants who feel constrained by structured options, and also those who have developed their own imaginal practice. It also functions as the "pass with presence" option — sitting quietly and attending inward is fully honored here. Receptive awareness is not passive; it's one of the deepest forms of participation.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===================== PAGE 4: INTEGRATION ===================== -->
+    <section class="page" id="page-3">
+
+        <div class="card">
+            <div class="card-accent accent-gold"></div>
+            <h2><span class="section-icon icon-gold">◇</span> Integration & Reflection</h2>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">Take a few minutes to ground yourself after your creative work. The depth tradition warns against merely letting images rise and then moving on. The real work is in <em>realizing them in actual life</em> — drawing meaning from what emerged and carrying it forward. Integration is where the process becomes personal.</p>
+
+            <div class="integration-prompt">
+                <h4>Returning to the Body</h4>
+                <p>Before reflecting, take three slow breaths. Notice what has shifted in your body since the start of group. Are you lighter? Heavier? Softer? More awake? Whatever you notice, let it be information — not judgment. The body is the first and last witness to the imaginal encounter.</p>
+            </div>
+
+            <div class="integration-prompt">
+                <h4>Reflection Prompts</h4>
+                <p>Choose one or two that resonate. You're welcome to write, share aloud, or hold your reflection silently.</p>
+            </div>
+
+            <div class="reflection-area">
+                <label>What image or moment surprised you today?</label>
+                <textarea placeholder="The image that arrived was not what I expected..."></textarea>
+            </div>
+
+            <div class="reflection-area">
+                <label>What did you learn by releasing the need for it to be "good"?</label>
+                <textarea placeholder="When I stopped trying to make it perfect..."></textarea>
+            </div>
+
+            <div class="reflection-area">
+                <label>If what you created could speak, what would it say to you?</label>
+                <textarea placeholder="It might say..."></textarea>
+            </div>
+
+            <div class="reflection-area">
+                <label>What is one way you might carry this encounter forward into your week?</label>
+                <textarea placeholder="I could..."></textarea>
+            </div>
+
+            <div class="facilitator-note" style="margin-top: 1.5rem;">
+                <p>Invite voluntary sharing in pairs first (2–3 minutes each), then open to the wider group. Remind participants they can share the experience without showing the artifact. Normalize all responses — including "nothing happened" or "it was uncomfortable." Both are valid data from the imaginal encounter. Resistance and emptiness carry their own messages.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-accent accent-violet"></div>
+            <h2><span class="section-icon icon-violet">◈</span> Discussion Seeds</h2>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.25rem;">For group processing after individual reflection:</p>
+
+            <div class="integration-prompt">
+                <p>◆ What was it like to create without a plan? How did your inner critic show up, and what did you do with it?</p>
+            </div>
+            <div class="integration-prompt">
+                <p>◆ The depth tradition suggests inner images have their own autonomy — they're more like visitors than inventions. Did your image surprise you or take a direction you didn't choose?</p>
+            </div>
+            <div class="integration-prompt">
+                <p>◆ Where do you notice the tension between <em>process</em> and <em>product</em> in your daily life — at work, in relationships, in how you evaluate yourself? What would it mean to soften that?</p>
+            </div>
+            <div class="integration-prompt">
+                <p>◆ What did it feel like to start with feeling rather than thinking? Was this natural, unfamiliar, or somewhere in between?</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-accent accent-teal"></div>
+            <h2><span class="section-icon icon-teal">◆</span> Closing</h2>
+
+            <div class="quote-block">
+                <p>"To stick with the image is to stay in the soul's body. The minute we begin to interpret and explain, we move from soul to mind."</p>
+                <div class="quote-source">— James Hillman</div>
+            </div>
+
+            <div class="closing-block" style="border: none; padding-top: 0;">
+                <p>Thank you for bringing your willingness today. This practice asks something rare of us — to meet the unknown without trying to control it, to let something emerge that we didn't plan, and to trust that the encounter itself is enough.</p>
+                <p style="margin-top: 1rem;">Whatever you met today — vivid or faint, comfortable or unsettling — it was real, and it was yours. Carry something small from this session into the week. A color, a word, a gesture, an image. Let it live alongside you.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // Page Navigation
+    function showPage(index) {
+        document.querySelectorAll('.page').forEach((p, i) => {
+            p.classList.toggle('active', i === index);
+        });
+        document.querySelectorAll('.nav-tab').forEach((t, i) => {
+            t.classList.toggle('active', i === index);
+            t.setAttribute('aria-selected', i === index);
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Expandable sections
+    function toggleExpand(el) {
+        el.classList.toggle('open');
+    }
+
+    // Station toggle
+    function toggleStation(card) {
+        const wasExpanded = card.classList.contains('expanded');
+        document.querySelectorAll('.station-card').forEach(c => c.classList.remove('expanded'));
+        if (!wasExpanded) {
+            card.classList.add('expanded');
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+    }
+
+    // Breathing exercise
+    let breathingActive = false;
+    let breathInterval = null;
+
+    function toggleBreathing() {
+        const circle = document.getElementById('breathCircle');
+        const text = document.getElementById('breathText');
+        const instruction = document.getElementById('breathInstruction');
+
+        if (breathingActive) {
+            breathingActive = false;
+            circle.classList.remove('breathing');
+            text.textContent = 'Begin';
+            instruction.textContent = '';
+            if (breathInterval) clearInterval(breathInterval);
+            return;
+        }
+
+        breathingActive = true;
+        circle.classList.add('breathing');
+
+        const phases = [
+            { text: 'Inhale', instruction: 'Breathe in slowly through your nose…', duration: 4000 },
+            { text: 'Hold', instruction: 'Gently hold…', duration: 4000 },
+            { text: 'Exhale', instruction: 'Release slowly through your mouth…', duration: 4000 },
+            { text: 'Rest', instruction: 'Rest in the stillness…', duration: 4000 }
+        ];
+
+        let phaseIndex = 0;
+
+        function runPhase() {
+            if (!breathingActive) return;
+            const phase = phases[phaseIndex % phases.length];
+            text.textContent = phase.text;
+            instruction.textContent = phase.instruction;
+            phaseIndex++;
+        }
+
+        runPhase();
+        breathInterval = setInterval(runPhase, 4000);
+    }
+
+    document.getElementById('breathCircle').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleBreathing();
+        }
+    });
+
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.principle-card').forEach((card, i) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 200 + i * 100);
+        });
+    });
+</script>
+
+</body>
+</html>
